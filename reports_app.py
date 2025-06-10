@@ -76,7 +76,7 @@ with st.sidebar:
         "💬 Оставить обратную связь": "feedback"
     }
     
-    selected_page = st.radio("", list(main_pages.keys()), key="main_menu")
+    selected_page = st.selectbox("", list(main_pages.keys()), key="main_menu", label_visibility="collapsed")
     
     st.markdown("---")
     
@@ -95,7 +95,7 @@ with st.sidebar:
             "⚠️ Проблемные вопросы": "admin_issues"
         }
         
-        selected_admin_page = st.radio("", list(admin_pages.keys()), key="admin_menu")
+        selected_admin_page = st.selectbox("", list(admin_pages.keys()), key="admin_menu", label_visibility="collapsed")
     
     # Информация о системе
     st.markdown("---")
