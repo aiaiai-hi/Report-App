@@ -75,19 +75,16 @@ with st.sidebar:
         "🤖 Задать вопрос (ИИ ассистент)": "ai_assistant",
         "💬 Оставить обратную связь": "feedback"
     }
-
+    
     # Для основного меню:
-for page_name in main_pages.keys():
-    if st.button(page_name, key=f"btn_{main_pages[page_name]}", use_container_width=True):
-        st.session_state.selected_page = page_name
-
-
+    if 'selected_page' not in st.session_state:
+        st.session_state.selected_page = "📋 Инструкции по отчетам"
     
-  #  selected_page = st.selectbox("", list(main_pages.keys()), key="main_menu", label_visibility="collapsed")
+    for page_name in main_pages.keys():
+        if st.button(page_name, key=f"btn_{main_pages[page_name]}", use_container_width=True):
+            st.session_state.selected_page = page_name
     
- #   st.markdown("---")
-
-
+    st.markdown("---")
     
     # Админ панель
     st.markdown("**Административная панель:**")
@@ -103,14 +100,14 @@ for page_name in main_pages.keys():
             "📊 Статистика по публикации": "admin_stats", 
             "⚠️ Проблемные вопросы": "admin_issues"
         }
+        
         # Для админ меню:
-for page_name in admin_pages.keys():
-    if st.button(page_name, key=f"admin_btn_{admin_pages[page_name]}", use_container_width=True):
-        st.session_state.selected_admin_page = page_name
-
-
-    
-        # selected_admin_page = st.selectbox("", list(admin_pages.keys()), key="admin_menu", label_visibility="collapsed")
+        if 'selected_admin_page' not in st.session_state:
+            st.session_state.selected_admin_page = "🔍 Контроль публикации отчетов"
+            
+        for page_name in admin_pages.keys():
+            if st.button(page_name, key=f"admin_btn_{admin_pages[page_name]}", use_container_width=True):
+                st.session_state.selected_admin_page = page_name
     
     # Информация о системе
     st.markdown("---")
@@ -159,14 +156,14 @@ def show_admin_issues():
     st.markdown('<div class="coming-soon">🚧 Мониторинг и управление проблемными вопросами</div>', unsafe_allow_html=True)
 
 # Отображение выбранной страницы
-if st.session_state.admin_mode and 'selected_admin_page' in locals():
+if st.session_state.admin_mode and 'selected_admin_page' in st.session_state:
     # Показываем админ страницы
     page_map = {
         "🔍 Контроль публикации отчетов": show_admin_control,
         "📊 Статистика по публикации": show_admin_stats, 
         "⚠️ Проблемные вопросы": show_admin_issues
     }
-    page_map[selected_admin_page]()
+    page_map[st.session_state.selected_admin_page]()
 else:
     # Показываем основные страницы
     page_map = {
@@ -177,7 +174,7 @@ else:
         "🤖 Задать вопрос (ИИ ассистент)": show_ai_assistant,
         "💬 Оставить обратную связь": show_feedback
     }
-    page_map[selected_page]()
+    page_map[st.session_state.selected_page]()
 
 # Подвал приложения
 st.markdown("---")
