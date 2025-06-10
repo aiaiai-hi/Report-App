@@ -75,10 +75,19 @@ with st.sidebar:
         "🤖 Задать вопрос (ИИ ассистент)": "ai_assistant",
         "💬 Оставить обратную связь": "feedback"
     }
+
+    # Для основного меню:
+for page_name in main_pages.keys():
+    if st.button(page_name, key=f"btn_{main_pages[page_name]}", use_container_width=True):
+        st.session_state.selected_page = page_name
+
+
     
-    selected_page = st.selectbox("", list(main_pages.keys()), key="main_menu", label_visibility="collapsed")
+  #  selected_page = st.selectbox("", list(main_pages.keys()), key="main_menu", label_visibility="collapsed")
     
-    st.markdown("---")
+ #   st.markdown("---")
+
+
     
     # Админ панель
     st.markdown("**Административная панель:**")
@@ -94,8 +103,14 @@ with st.sidebar:
             "📊 Статистика по публикации": "admin_stats", 
             "⚠️ Проблемные вопросы": "admin_issues"
         }
-        
-        selected_admin_page = st.selectbox("", list(admin_pages.keys()), key="admin_menu", label_visibility="collapsed")
+        # Для админ меню:
+for page_name in admin_pages.keys():
+    if st.button(page_name, key=f"admin_btn_{admin_pages[page_name]}", use_container_width=True):
+        st.session_state.selected_admin_page = page_name
+
+
+    
+        # selected_admin_page = st.selectbox("", list(admin_pages.keys()), key="admin_menu", label_visibility="collapsed")
     
     # Информация о системе
     st.markdown("---")
