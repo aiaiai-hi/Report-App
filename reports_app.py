@@ -1,4 +1,5 @@
 import streamlit as st
+import pandas as pd
 from datetime import datetime
 
 # Конфигурация страницы
@@ -143,7 +144,13 @@ def show_feedback():
 def show_admin_control():
     st.markdown('<div class="page-header">🔍 Контроль публикации отчетов</div>', unsafe_allow_html=True)
     st.markdown('<span class="admin-badge">АДМИН</span>', unsafe_allow_html=True)
-    st.markdown('<div class="coming-soon">🚧 Панель администратора для контроля публикации отчетов</div>', unsafe_allow_html=True)
+    
+    from utils import display_request_analysis
+    
+    st.markdown("## 📊 Анализатор запросов и стадий рассмотрения")
+    st.info("Загрузите файл с запросами для анализа времени рассмотрения и текущих стадий")
+    
+    display_request_analysis()
 
 def show_admin_stats():
     st.markdown('<div class="page-header">📊 Статистика по публикации</div>', unsafe_allow_html=True)
