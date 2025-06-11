@@ -199,8 +199,8 @@ def display_request_analysis():
 def display_results(df):
     """Отображение результатов с фильтрами и поиском"""
     
-    st.markdown("---")
-    st.subheader("🔍 Результаты анализа")
+   # st.markdown("---")
+   # st.subheader("🔍 Результаты анализа")
     
     # Строка поиска
     st.subheader("🔎 Поиск")
@@ -298,7 +298,7 @@ def display_results(df):
         column_config = {
             'business_id': st.column_config.NumberColumn('business_id', format='%d'),
             'created_at': st.column_config.TextColumn('Дата создания'),
-            'рабочих_дней_в_работе': st.column_config.NumberColumn('Рабочих дней в работе', format='%d'),
+            'рабочих_дней_в_работе': st.column_config.NumberColumn('Дней в работе', format='%d'),
             'form_type_report': st.column_config.TextColumn('Тип отчета'),
             'report_code': st.column_config.TextColumn('Код отчета'),
             'report_name': st.column_config.TextColumn('Название отчета'),
