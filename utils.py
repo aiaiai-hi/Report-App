@@ -1,9 +1,39 @@
-import streamlit as st
 import pandas as pd
 import numpy as np
 from datetime import datetime, timedelta
 import io
-from workalendar.europe import Russia
+import streamlit as st
+
+# Безопасный импорт workalendar
+try:
+    from workalendar.europe import Russia
+    WORKALENDAR_AVAILABLE = True
+except ImportError:
+    WORKALENDAR_AVAILABLE = False
+
+def calculate_business_days(start_date, end_date):
+    """Вычисляет количество рабочих дней между двумя датами"""
+    if pd.isna(start_date) or pd.isna(end_date):
+        return 0
+    
+    try:
+        if WORKALENDAR_AVAILABLE:
+            # Используем workalendar для точного расчета с праздниками
+            cal = Russia()
+            
+            if hasattr(start_date, 'date'):
+                start_date = start_date.date()
+            if hasattr(end_date, 'date'):
+                end_date = end_date.date()
+            
+            return cal.get_working_days_delta(start_date, end_date)
+        else:
+            # Используем pandas bdate_range как альтернативу
+            return len(pd.bdate_range(start_date, end_date))
+            
+    except Exception as e:
+        return 0
+
 
 
 def calculate_business_days(start_date, end_date):
