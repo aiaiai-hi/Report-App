@@ -1,8 +1,10 @@
+import streamlit as st
 import pandas as pd
 import numpy as np
 from datetime import datetime, timedelta
 import io
 from workalendar.europe import Russia
+
 
 def calculate_business_days(start_date, end_date):
     """Вычисляет количество рабочих дней между двумя датами по российскому производственному календарю"""
