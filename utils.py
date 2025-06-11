@@ -1,16 +1,3 @@
-# 1. ОБНОВИТЬ requirements.txt
-# Добавить в Requirements.txt:
-
-streamlit>=1.28.0
-pandas>=1.5.0
-plotly>=5.15.0
-numpy>=1.24.0
-workalendar>=17.0.0
-openpyxl>=3.1.0
-
-# 2. СОЗДАТЬ ОТДЕЛЬНЫЙ ФАЙЛ utils.py
-# Создайте новый файл utils.py с функциями из анализатора:
-
 import pandas as pd
 import numpy as np
 from datetime import datetime, timedelta
@@ -309,24 +296,7 @@ def display_results(df):
     else:
         st.warning("⚠️ Нет данных для отображения. Попробуйте изменить фильтры.")
 
-# 3. ИЗМЕНИТЬ ФУНКЦИЮ show_admin_control в reports_app.py
-# Заменить эту функцию:
 
-def show_admin_control():
-    st.markdown('<div class="page-header">🔍 Контроль публикации отчетов</div>', unsafe_allow_html=True)
-    st.markdown('<span class="admin-badge">АДМИН</span>', unsafe_allow_html=True)
-    
-    # Импортируем функцию из utils
-    from utils import display_request_analysis
-    
-    st.markdown("## 📊 Анализатор запросов и стадий рассмотрения")
-    st.info("Загрузите файл с запросами для анализа времени рассмотрения и текущих стадий")
-    
-    # Вызываем основную функцию анализатора
-    display_request_analysis()
-
-# 4. ДОБАВИТЬ ИМПОРТ В НАЧАЛО reports_app.py
-# В начало файла reports_app.py добавить:
 
 import streamlit as st
 from datetime import datetime
