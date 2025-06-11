@@ -4,3 +4,5 @@ plotly>=5.15.0
 numpy>=1.24.0
 workalendar>=17.0.0
 openpyxl>=3.1.0
+xlsxwriter
+datetime
