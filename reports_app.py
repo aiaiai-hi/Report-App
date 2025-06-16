@@ -511,24 +511,27 @@ def show_actions():
     ]
     
     # Отображение разделов
-    for section in sections:
+
+    # Создаем вкладки
+    tab_titles = [f"{section['icon']} {section['title']}" for section in sections]
+    tabs = st.tabs(tab_titles)
+    
+    # Отображение содержимого каждой вкладки
+    for i, (tab, section) in enumerate(zip(tabs, sections)):
         key = section['key']
         title = section['title']
         icon = section['icon']
         
-        # Контейнер для каждого раздела
-        with st.container():
-            st.markdown(f"### {icon} {title}")
-            
+        with tab:
             # Если админ режим включен, показываем редактор
             if st.session_state.admin_mode:
                 st.markdown('<span class="admin-badge">РЕЖИМ РЕДАКТИРОВАНИЯ</span>', unsafe_allow_html=True)
                 
                 # Текстовое поле для редактирования
                 edited_text = st.text_area(
-                    f"Редактировать текст для '{title}':",
+                    f"Редактировать текст:",
                     value=st.session_state.action_texts[key],
-                    height=150,
+                    height=200,
                     key=f"edit_{key}",
                     help="В админ режиме вы можете редактировать этот текст"
                 )
@@ -544,7 +547,6 @@ def show_actions():
                 
                 with col2:
                     if st.button(f"🔄 Сбросить", key=f"reset_{key}"):
-                        # Возвращаем исходный текст (можно сделать словарь с исходными значениями)
                         st.warning("⚠️ Сброс к исходному тексту")
                         st.rerun()
             
@@ -561,9 +563,6 @@ def show_actions():
                     <p style="margin: 0; line-height: 1.6;">{st.session_state.action_texts[key]}</p>
                 </div>
                 """, unsafe_allow_html=True)
-            
-            # Разделитель между разделами
-            st.markdown("---")
     
     # Дополнительная информация внизу страницы
     st.markdown("### 📞 Нужна помощь?")
