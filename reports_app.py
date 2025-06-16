@@ -469,7 +469,7 @@ def show_actions():
     # st.markdown('<div class="page-header">⚡ Действия с отчетами</div>', unsafe_allow_html=True)
     # st.markdown('<div class="coming-soon">🚧 Здесь будут доступны различные действия с отчетами: создание, редактирование, удаление</div>', unsafe_allow_html=True)
 
-st.markdown('<div class="page-header">⚡ Действия с отчетами</div>', unsafe_allow_html=True)
+    st.markdown('<div class="page-header">⚡ Действия с отчетами</div>', unsafe_allow_html=True)
     
     # Инициализация состояния для редактируемых текстов
     if 'action_texts' not in st.session_state:
